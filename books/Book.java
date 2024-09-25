@@ -14,8 +14,7 @@ public class Book {
     private int pages;
     private double price;
 
-    public Book(int id, String title, String author, String publisher,
-                int publicationYear, int pages, double price) {
+    public Book(int id, String title, String author, String publisher, int publicationYear, int pages, double price) {
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -35,18 +34,19 @@ public class Book {
             }
         }
         this.id = id;
-        usedIds[idCount++] = id; // Додаємо ID у масив використаних
+        usedIds[idCount++] = id;
     }
 
     public void setTitle(String title) {
         String normalizedTitle = title.toLowerCase();
         for (int i = 0; i < titleCount; i++) {
             if (usedTitles[i].equals(normalizedTitle)) {
+                if (usedIds[idCount--] == id) {usedIds[idCount--] = 0;}
                 throw new IllegalArgumentException("Назва книги повинна бути унікальною!");
             }
         }
         this.title = title;
-        usedTitles[titleCount++] = normalizedTitle; // Додаємо назву у масив використаних назв
+        usedTitles[titleCount++] = normalizedTitle;
     }
 
     public void setAuthor(String author) {
